@@ -30,7 +30,7 @@ body{
 #input-field{
     width: 250px;
     height: 35px;
-    background-color: #FAF4F0    ;
+    background-color: #FAF4F0;
     color: #5B507A;
     font-family: 'Times New Roman';
     font-size: 30px;
@@ -43,6 +43,10 @@ body{
 
 #input-field::placeholder{
     color: #A59CBF;
+}
+
+#input-field:hover::placeholder{
+    color: #5B507A;
 }
 
 #add-button{
