@@ -15,6 +15,9 @@ let entries;
 const inputEl = document.getElementById('input-field');
 const addButtonEl = document.getElementById('add-button');
 const shoppingListEl = document.getElementById('shopping-list');
+const headerBtnEl = document.getElementById('header-button');
+
+headerBtnEl.addEventListener('click', () => window.location.href = "https://github.com/shal-in")
 
 let firstLoad = true;
 
@@ -22,6 +25,7 @@ onValue(shoppingListRef, (snapshot) => {
     if (snapshot.exists()) {
         entries = Object.entries(snapshot.val());
         values = Object.values(snapshot.val());
+
         if (firstLoad === true) {
             for (let entry of entries) {
                 let entryID = entry[0];
@@ -29,14 +33,10 @@ onValue(shoppingListRef, (snapshot) => {
 
                 addToHTML(entryID, entryValue);
             }
-        firstLoad = false
-        } 
-    
-
-
+            firstLoad = false;
+        }
     }
 });
-
 
 
 
@@ -83,6 +83,7 @@ function addButtonFunction() {
 function addToHTML(key, value) {
     let newItem = document.createElement('li');
     newItem.setAttribute('id', key);
+    newItem.setAttribute('class', 'fade-in');
     newItem.textContent = value
     newItem.addEventListener('click', () => removeFromHTML(key));
 
@@ -95,8 +96,11 @@ function removeFromHTML(key) {
 
     let item = document.getElementById(key);
     if (item) {
-      let parentElement = item.parentNode;
-      parentElement.removeChild(item);
+        let parentElement = item.parentNode;
+        item.setAttribute('class', 'fade-out')
+        setTimeout(function() {
+            parentElement.removeChild(item);
+        }, 490);
     }
 }
 

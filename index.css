@@ -4,11 +4,44 @@
     box-sizing: border-box
 }
 
+:root {
+    --border-style: none;
+    /* --border-style: 1px solid black; */
+}
+
 body{
     background-color: #C6CAED  ;
     display: flex;
     justify-content: center;
     padding: 20px;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
 #button-container{ 
@@ -18,8 +51,25 @@ body{
     justify-content: center;
     padding-top:10px;
     max-width: 320px;
-    border: 1px solid black;
     margin: 0;
+    border: var(--border-style);
+}
+
+.header {
+    cursor: auto;
+    color: #004262;
+    border: var(--border-style);
+    font-size: 31px;
+    padding-bottom: 8px;
+}
+
+#header-button {
+    cursor: pointer;
+    color: #04141c;
+}
+
+#header-button:hover {
+    color: #969b9f;
 }
 
 #cart-image{
@@ -35,7 +85,7 @@ body{
     font-family: 'Times New Roman';
     font-size: 30px;
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 3px;
     border: none;
     border-radius: 8px;
     padding-left: 15px;
@@ -50,13 +100,14 @@ body{
 }
 
 #add-button{
+    cursor: pointer;
     width: 45px;
     height: 35px;
     color: #FAF4F0 ;
     background-color: #5B507A;
     margin-top: 10px;
     margin-left: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 3px;
     border: none;
     border-radius: 8px;
     font-family: 'Times New Roman';
@@ -69,15 +120,28 @@ body{
     color: #5B507A;
 }
 
+#remove-text {
+    margin-top: 5px;
+    text-align: center;
+    width: 320px;
+    font-size: small;
+    font-weight: bolder;
+    color: #04141c;
+    border: var(--border-style);
+}
+
 ul {
     list-style-type: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    border: var(--border-style);
+    margin-top: 10px;
 }
 
 ul li {
+    cursor: pointer;
     font-size: 20px;
     background-color: #5B507A;
     padding: 15px;
