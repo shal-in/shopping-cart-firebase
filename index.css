@@ -14,6 +14,7 @@ body{
     display: flex;
     justify-content: center;
     padding: 20px;
+    font-family: 'Times New Roman';
 }
 
 .fade-in {
@@ -82,16 +83,17 @@ body{
     height: 35px;
     background-color: #FAF4F0;
     color: #5B507A;
-    font-family: 'Times New Roman';
     font-size: 30px;
     margin-top: 10px;
     margin-bottom: 3px;
     border: none;
     border-radius: 8px;
     padding-left: 15px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #input-field::placeholder{
+    font-family: 'Times New Roman', Times, serif;
     color: #A59CBF;
 }
 
@@ -110,7 +112,6 @@ body{
     margin-bottom: 3px;
     border: none;
     border-radius: 8px;
-    font-family: 'Times New Roman';
     font-size: 25px;
     font-weight: bolder;
 }
@@ -138,6 +139,8 @@ ul {
     gap: 10px;
     border: var(--border-style);
     margin-top: 10px;
+    letter-spacing: 0.4px;
+    color: #FAF4F0;
 }
 
 ul li {

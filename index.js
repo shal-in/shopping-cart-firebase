@@ -5,40 +5,42 @@ const appSettings = {
     databaseURL: 'https://shalin-shopping-cart-default-rtdb.europe-west1.firebasedatabase.app/'
 }
 
+console.log(appSettings.databaseURL)
+
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const shoppingListRef = ref(database, 'shoppingList');
 
-let values;
-let entries;
+let values = [];
+let entries = [];
 
 const inputEl = document.getElementById('input-field');
 const addButtonEl = document.getElementById('add-button');
 const shoppingListEl = document.getElementById('shopping-list');
 const headerBtnEl = document.getElementById('header-button');
 
-headerBtnEl.addEventListener('click', () => window.location.href = "https://github.com/shal-in")
+headerBtnEl.addEventListener('click', () => window.open('https://github.com/shal-in', "_blank"));
 
-let firstLoad = true;
+let addedKeys = ['key1']
 
 onValue(shoppingListRef, (snapshot) => {
+    console.log('database refresh')
     if (snapshot.exists()) {
         entries = Object.entries(snapshot.val());
         values = Object.values(snapshot.val());
 
-        if (firstLoad === true) {
-            for (let entry of entries) {
-                let entryID = entry[0];
-                let entryValue = entry[1];
+        for (let entry of entries) {
+            let entryKey = entry[0];
+            let entryValue = entry[1];
 
-                addToHTML(entryID, entryValue);
+            if (!addedKeys.includes(entryKey)) {
+                addToHTML(entryKey, entryValue)
+                addedKeys.push(entryKey);
+                console.log(`${entryValue} new`)
             }
-            firstLoad = false;
         }
     }
 });
-
-
 
 inputEl.addEventListener('keyup', (e) => {
     if (event.keyCode  === 13) {
@@ -76,16 +78,15 @@ function addButtonFunction() {
     let shoppingListData = ref(database, `shoppingList/${key}`);
     set(shoppingListData, value);
 
-    addToHTML(key, value);
     inputEl.value = ''
 }
 
-function addToHTML(key, value) {
+function addToHTML(entryKey, entryValue) {
     let newItem = document.createElement('li');
-    newItem.setAttribute('id', key);
+    newItem.setAttribute('id', entryKey);
     newItem.setAttribute('class', 'fade-in');
-    newItem.textContent = value
-    newItem.addEventListener('click', () => removeFromHTML(key));
+    newItem.textContent = entryValue
+    newItem.addEventListener('click', () => removeFromHTML(entryKey));
 
     shoppingListEl.appendChild(newItem)
 }
@@ -100,8 +101,10 @@ function removeFromHTML(key) {
         item.setAttribute('class', 'fade-out')
         setTimeout(function() {
             parentElement.removeChild(item);
-        }, 490);
+        }, 495);
     }
+
+    values = [];
 }
 
 function clearInput() {
