@@ -5,8 +5,6 @@ const appSettings = {
     databaseURL: 'https://shalin-shopping-cart-default-rtdb.europe-west1.firebasedatabase.app/'
 }
 
-console.log(appSettings.databaseURL)
-
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
 const shoppingListRef = ref(database, 'shoppingList');
@@ -24,7 +22,6 @@ headerBtnEl.addEventListener('click', () => window.open('https://github.com/shal
 let addedKeys = ['key1']
 
 onValue(shoppingListRef, (snapshot) => {
-    console.log('database refresh')
     if (snapshot.exists()) {
         entries = Object.entries(snapshot.val());
         values = Object.values(snapshot.val());
@@ -36,7 +33,6 @@ onValue(shoppingListRef, (snapshot) => {
             if (!addedKeys.includes(entryKey)) {
                 addToHTML(entryKey, entryValue)
                 addedKeys.push(entryKey);
-                console.log(`${entryValue} new`)
             }
         }
     }
